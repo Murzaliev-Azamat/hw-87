@@ -120,14 +120,17 @@ export interface OneNewsApi {
 }
 
 export interface Comment {
-  id: number;
-  news_id: number;
-  author: string;
+  _id: number;
+  author: {
+    _id: string;
+    username: string;
+  }
+  oneNews: string;
   message: string;
 }
 
 export interface CommentApi {
-  news_id: number;
-  author: string;
+  oneNews: string | undefined;
+  // author: string;
   message: string;
 }

@@ -34,14 +34,14 @@ const ShortOneNews: React.FC<Props> = ({title,description,image,id,date}) => {
         <Typography gutterBottom variant="h5" component="div">
           {title ? title : 'Anonymous'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" sx={{mb: 1}}>
           {description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {dayjs(date).format('DD.MM.YYYY HH:mm:ss')}
         </Typography>
       </CardContent>
-      <NavLink to={"/news/" + id}>Read full post</NavLink>
+      <NavLink to={"/news/" + id} style={{marginLeft: "16px"}}>Read full post</NavLink>
     </Card>
   );
 };

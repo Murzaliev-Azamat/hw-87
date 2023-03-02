@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import FormForComments from '../../../features/comments/FormForComments';
 import { apiUrl } from '../../../constants';
 import dayjs from 'dayjs';
+import Comments from '../../../features/comments/Comments';
 
 
 const FullOneNews = () => {
@@ -48,6 +49,7 @@ const FullOneNews = () => {
         </Typography>
       </CardContent>
     </Card>
+      <Comments/>
       <FormForComments/>
     </>
   );

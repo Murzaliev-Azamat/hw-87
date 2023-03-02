@@ -1,7 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import { deleteComment, fetchComments } from '../../../features/comments/commentsThunks';
-import { useAppDispatch } from '../../../app/hooks';
+import { Box, Typography } from '@mui/material';
 
 interface Props {
   id: number;
@@ -10,24 +8,17 @@ interface Props {
 }
 
 const CardForComment: React.FC<Props> = ({author,message,id}) => {
-  const dispatch = useAppDispatch();
-
-  const removeDish = async (id: string) => {
-    await dispatch(deleteComment(id));
-    await dispatch(fetchComments());
-  }
 
   return (
-    <Box sx={{border: 1, display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+    <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px"}}>
       <Box>
         <Typography variant="body1" color="text.secondary">
           {author + " wrote: "}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2">
           {message}
         </Typography>
       </Box>
-      <Button onClick={() => removeDish(id.toString())} variant="contained">Delete</Button>
     </Box>
   );
 };

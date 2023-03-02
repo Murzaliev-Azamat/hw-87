@@ -6,6 +6,12 @@ export interface OneNewsMutation {
   date: Date;
 }
 
+export interface CommentMutation {
+  author: ObjectId;
+  oneNews: ObjectId;
+  message: string;
+}
+
 export interface AlbumMutation {
   artist: string;
   name: string;

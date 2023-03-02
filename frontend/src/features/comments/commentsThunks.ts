@@ -1,11 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from '../../axiosApi';
 import { Comment, CommentApi } from '../../../types';
+import { RootState } from '../../app/store';
 
-export const fetchComments = createAsyncThunk<Comment[]>(
+export const fetchComments = createAsyncThunk<Comment[], string>(
   'comments/fetchAll',
-  async () => {
-    const commentsResponse = await axiosApi.get<Comment[]>('/comments');
+  async (id) => {
+    const commentsResponse = await axiosApi.get<Comment[]>('/comments/' + id);
     return commentsResponse.data;
   }
 );
@@ -24,28 +25,17 @@ export const fetchComment = createAsyncThunk<Comment, string>(
   },
 );
 
-// export const addOrder = createAsyncThunk<void, OrderApi>(
-//   'home/addOrder',
-//   async (order) => {
-//     await axiosApi.post<OrderApi>('/orders.json', order);
-//   }
-// );
 
-export const addComment = createAsyncThunk<void, CommentApi>(
+export const addComment = createAsyncThunk<void, CommentApi, { state: RootState }>(
   'comments/add',
-  async (comment) => {
-    // const formData = new FormData();
-    //
-    // const keys = Object.keys(comment) as (keyof CommentApi)[];
-    // keys.forEach(key => {
-    //   const value = comment[key];
-    //
-    //   if (value !== null) {
-    //     formData.append(key, value);
-    //   }
-    // });
+  async (comment, {getState}) => {
+    const user = getState().users.user;
 
-    await axiosApi.post<CommentApi>('/comments', comment);
+    if (user) {
+    await axiosApi.post<CommentApi>('/comments', comment, {headers: {'Authorization': user.token}});
+    } else {
+      throw new Error('No user');
+    }
   }
 );
 
