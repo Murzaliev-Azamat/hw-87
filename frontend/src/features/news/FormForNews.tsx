@@ -55,6 +55,12 @@ const FormForNews = () => {
     return <Navigate to="/login" />
   }
 
+  let disabled = false;
+
+  if (state.description === '' && state.image === null) {
+    disabled = true;
+  }
+
   return (
     <form
       autoComplete="off"
@@ -80,7 +86,6 @@ const FormForNews = () => {
             value={state.description}
             onChange={inputChangeHandler}
             name="description"
-            required
           />
         </Grid>
 
@@ -93,7 +98,7 @@ const FormForNews = () => {
         </Grid>
       </Grid>
 
-      <Button type="submit" color="primary" variant="contained">
+      <Button disabled={disabled} type="submit" color="primary" variant="contained">
         Add news
       </Button>
     </form>

@@ -1,4 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, {HydratedDocument} from 'mongoose';
+import {OneNewsMutation} from "../types";
+
 const Schema = mongoose.Schema;
 
 const OneNewsSchema = new Schema({
@@ -10,8 +12,28 @@ const OneNewsSchema = new Schema({
     type: String,
     required: true
   },
-  description: String,
-  image: String,
+  description: {
+    type: String,
+    validate: {
+      validator: function (this: HydratedDocument<OneNewsMutation>, description: string) {
+        if (!this.image && !description) {
+          return false
+        }
+      },
+      message: 'Description or image does not exist',
+    },
+  },
+  image: {
+    type: String,
+    validate: {
+      validator: function (this: HydratedDocument<OneNewsMutation>, image: string) {
+        if (!this.description && !image) {
+          return false
+        }
+      },
+      message: 'Description or image does not exist',
+    },
+  },
   date: {
     type: Date,
     required: true
