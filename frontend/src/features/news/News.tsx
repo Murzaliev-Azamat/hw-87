@@ -14,8 +14,6 @@ const News = () => {
     dispatch(fetchAllNews());
   }, [dispatch]);
 
-  console.log(news)
-
   let info = null;
 
   if (fetchAllLoading) {

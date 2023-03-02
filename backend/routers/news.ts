@@ -1,11 +1,9 @@
 import express from "express";
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 import {imagesUpload} from "../multer";
 import {OneNewsMutation} from "../types";
 import OneNews from "../models/OneNews";
 import auth, {RequestWithUser} from "../middleware/auth";
-import Album from "../models/Album";
-import albumsRouter from "./albums";
 
 const newsRouter = express.Router();
 

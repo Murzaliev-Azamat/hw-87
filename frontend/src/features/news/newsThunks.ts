@@ -48,10 +48,3 @@ export const addOneNews = createAsyncThunk<void, OneNewsApi, { state: RootState 
     }
   }
 );
-
-export const deleteOneNews = createAsyncThunk<void, string>(
-  'news/deleteOne',
-  async (id) => {
-    await axiosApi.delete('/news/' + id);
-  }
-);

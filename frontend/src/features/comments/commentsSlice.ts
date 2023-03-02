@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { addComment, fetchComment, fetchComments } from './commentsThunks';
+import { addComment, fetchComments } from './commentsThunks';
 import { Comment } from '../../../types';
 
 
@@ -31,16 +31,6 @@ export const CommentsSlice = createSlice({
       state.comments = action.payload;
     });
     builder.addCase(fetchComments.rejected, (state) => {
-      state.fetchAllLoading = false;
-    });
-    builder.addCase(fetchComment.pending, (state) => {
-      state.fetchAllLoading = true;
-    });
-    builder.addCase(fetchComment.fulfilled, (state, action) => {
-      state.fetchAllLoading = false;
-      state.comment = action.payload;
-    });
-    builder.addCase(fetchComment.rejected, (state) => {
       state.fetchAllLoading = false;
     });
     builder.addCase(addComment.pending, (state) => {

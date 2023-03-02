@@ -47,16 +47,6 @@ const FormForComments = () => {
       autoComplete="off"
       onSubmit={submitFormHandler}
     >
-      {/*<Grid item container justifyContent="space-between" alignItems="center" xs sx={{mb: 1}}>*/}
-      {/*  <TextField*/}
-      {/*    sx={{width: '100%'}}*/}
-      {/*    id="author" label="Author"*/}
-      {/*    value={state.author}*/}
-      {/*    onChange={inputChangeHandler}*/}
-      {/*    name="author"*/}
-      {/*  />*/}
-      {/*</Grid>*/}
-
       <Grid container direction="column" spacing={2} sx={{mb: 1}}>
         <Grid item xs>
           <TextField

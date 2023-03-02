@@ -11,21 +11,6 @@ export const fetchComments = createAsyncThunk<Comment[], string>(
   }
 );
 
-export const fetchComment = createAsyncThunk<Comment, string>(
-  'comments/fetchOne',
-  async (id) => {
-    const commentResponse = await axiosApi.get<Comment | null>('comments/' + id);
-    const comment = commentResponse.data;
-
-    if (comment === null) {
-      throw new Error('Not found!')
-    }
-
-    return comment;
-  },
-);
-
-
 export const addComment = createAsyncThunk<void, CommentApi, { state: RootState }>(
   'comments/add',
   async (comment, {getState}) => {
@@ -36,12 +21,5 @@ export const addComment = createAsyncThunk<void, CommentApi, { state: RootState 
     } else {
       throw new Error('No user');
     }
-  }
-);
-
-export const deleteComment = createAsyncThunk<void, string>(
-  'comments/deleteOne',
-  async (id) => {
-    await axiosApi.delete('/comments/' + id);
   }
 );

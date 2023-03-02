@@ -1,26 +1,18 @@
-import { artistsReducer } from '../features/artists/artistsSlice';
-import { albumsReducer } from '../features/albums/albumsSlice';
-import { tracksReducer } from '../features/tracks/tracksSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import { usersReducer } from '../features/users/usersSlise';
-import { tracksHistoryReducer } from '../features/tracksHistory/tracksHistorySlice';
 import { newsReducer } from '../features/news/newsSlice';
 import { commentsReducer } from '../features/comments/commentsSlice';
 
 const usersPersistConfig = {
-  key: 'shop:users',
+  key: 'newsApp:users',
   storage,
   whitelist: ['user'],
 };
 
 const rootReducer = combineReducers({
-  artists: artistsReducer,
-  albums: albumsReducer,
-  tracks: tracksReducer,
-  tracksHistory: tracksHistoryReducer,
   news: newsReducer,
   comments: commentsReducer,
   users: persistReducer(usersPersistConfig, usersReducer),

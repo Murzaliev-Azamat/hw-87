@@ -16,7 +16,7 @@ const Comments = () => {
     if (id) {
       dispatch(fetchComments(id));
     }
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div>
