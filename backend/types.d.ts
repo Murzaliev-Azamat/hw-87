@@ -1,11 +1,10 @@
-export interface Artist {
-  id: string;
-  name: string;
+export interface OneNewsMutation {
+  author: ObjectId;
+  title: string;
+  description: string;
   image: string | null;
-  info: string;
+  date: Date;
 }
-
-export type ArtistWithoutId = Omit<Artist, 'id'>;
 
 export interface AlbumMutation {
   artist: string;

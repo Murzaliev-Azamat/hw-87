@@ -98,3 +98,36 @@ export interface LoginMutation {
 export interface GlobalError {
   error: string;
 }
+
+
+
+
+
+
+
+export interface OneNews {
+  _id: number;
+  title: string;
+  description: string;
+  image: string | null;
+  date: string;
+}
+
+export interface OneNewsApi {
+  title: string;
+  description: string;
+  image: File | null;
+}
+
+export interface Comment {
+  id: number;
+  news_id: number;
+  author: string;
+  message: string;
+}
+
+export interface CommentApi {
+  news_id: number;
+  author: string;
+  message: string;
+}
