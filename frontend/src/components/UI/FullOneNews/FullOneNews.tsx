@@ -25,6 +25,7 @@ const FullOneNews = () => {
   let cardImage = undefined;
   let infoImage = null;
 
+
   if (oneNews?.image) {
     cardImage = apiUrl + '/' + oneNews.image;
     infoImage = (<CardMedia
