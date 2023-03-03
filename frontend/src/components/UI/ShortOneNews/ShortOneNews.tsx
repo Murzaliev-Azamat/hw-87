@@ -24,6 +24,13 @@ const ShortOneNews: React.FC<Props> = ({title,description,image,id,date}) => {
       image={cardImage}
       title="picture"
     />)
+  } else {
+    cardImage = 'https://justtextit.com/images/social.png';
+    infoImage = (<CardMedia
+      sx={{ height: 140 }}
+      image={cardImage}
+      title="picture"
+    />)
   }
 
 

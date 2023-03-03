@@ -8,13 +8,7 @@ import Comment from "../models/Comment";
 const commentsRouter = express.Router();
 
 commentsRouter.get('/:id', async (req, res, next) => {
-  // let oneNews_id = req.query.artist
   try {
-    // if (req.params.id) {
-    //   const comments = await Comment.find({oneNews: req.params.id});
-    //   return res.send(comments);
-    // }
-
     const comments = await Comment.find({oneNews: req.params.id}).populate('author', 'username');
     return res.send(comments);
   } catch (e) {
