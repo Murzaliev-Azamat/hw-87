@@ -8,14 +8,16 @@ interface NewsState {
   news: OneNews[] | [];
   oneNews: OneNews | null;
   fetchAllLoading: boolean;
-  addLoading: boolean;
+  fetchOneNewsLoading: boolean;
+  addOneNewsLoading: boolean;
 }
 
 const initialState: NewsState = {
   news: [],
   oneNews: null,
   fetchAllLoading: false,
-  addLoading: false,
+  fetchOneNewsLoading: false,
+  addOneNewsLoading: false,
 }
 
 export const NewsSlice = createSlice({
@@ -34,23 +36,23 @@ export const NewsSlice = createSlice({
       state.fetchAllLoading = false;
     });
     builder.addCase(fetchOneNews.pending, (state) => {
-      state.fetchAllLoading = true;
+      state.fetchOneNewsLoading = true;
     });
     builder.addCase(fetchOneNews.fulfilled, (state, action) => {
-      state.fetchAllLoading = false;
+      state.fetchOneNewsLoading = false;
       state.oneNews = action.payload;
     });
     builder.addCase(fetchOneNews.rejected, (state) => {
-      state.fetchAllLoading = false;
+      state.fetchOneNewsLoading = false;
     });
     builder.addCase(addOneNews.pending, (state) => {
-      state.addLoading = true;
+      state.addOneNewsLoading = true;
     });
     builder.addCase(addOneNews.fulfilled, (state) => {
-      state.addLoading = false;
+      state.addOneNewsLoading = false;
     });
     builder.addCase(addOneNews.rejected, (state) => {
-      state.addLoading = false;
+      state.addOneNewsLoading = false;
     });
   }});
 
@@ -59,3 +61,5 @@ export const selectNews = (state: RootState) => state.news.news;
 export const selectOneNews = (state: RootState) => state.news.oneNews;
 
 export const selectFetchAllLoading = (state: RootState) => state.news.fetchAllLoading;
+export const selectAddOneNewsLoading = (state: RootState) => state.news.addOneNewsLoading;
+export const selectFetchOneNewsLoading = (state: RootState) => state.news.fetchOneNewsLoading;

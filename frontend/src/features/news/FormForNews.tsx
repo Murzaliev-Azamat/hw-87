@@ -6,11 +6,13 @@ import FileInput from '../../components/UI/FileInput/FileInput';
 import { OneNewsApi } from '../../../types';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { selectUser } from '../users/usersSlise';
+import { selectAddOneNewsLoading } from './newsSlice';
 
 const FormForNews = () => {
   const navigate = useNavigate();
-  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const addOneNewsLoading = useAppSelector(selectAddOneNewsLoading);
 
   const [state, setState] = useState<OneNewsApi>({
     title: '',
@@ -57,7 +59,7 @@ const FormForNews = () => {
 
   let disabled = false;
 
-  if (state.description === '' && state.image === null) {
+  if (state.description === '' && state.image === null || addOneNewsLoading) {
     disabled = true;
   }
 

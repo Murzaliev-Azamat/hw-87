@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { CommentApi } from '../../../types';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { addComment, fetchComments } from './commentsThunks';
 import { selectUser } from '../users/usersSlise';
+import { selectAddCommentLoading } from './commentsSlice';
 
 
 const FormForComments = () => {
   const {id} = useParams();
-  const user = useAppSelector(selectUser);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const addCommentLoading = useAppSelector(selectAddCommentLoading);
 
   const [state, setState] = useState<CommentApi>({
-    // author: '',
     message: '',
     oneNews: '',
   });
@@ -22,13 +22,13 @@ const FormForComments = () => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(addComment({
-      // author: state.author,
       message: state.message,
       oneNews: id,
     }));
     setState({message: '', oneNews: ''});
-    // await dispatch(fetchComments());
-    navigate('/');
+    if (id) {
+      await dispatch(fetchComments(id));
+    }
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +38,6 @@ const FormForComments = () => {
       return {...prevState, [name]: value};
     });
   };
-
-
 
   return (
     <form
@@ -62,7 +60,7 @@ const FormForComments = () => {
 
       </Grid>
 
-      <Button type="submit" color="primary" variant="contained">
+      <Button type="submit" color="primary" variant="contained" disabled={addCommentLoading}>
         Add comment
       </Button>
     </form>

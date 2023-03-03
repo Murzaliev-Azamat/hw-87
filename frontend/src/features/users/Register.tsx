@@ -4,13 +4,14 @@ import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } fro
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { register } from './usersThunks';
-import { selectRegisterError } from './usersSlise';
+import { selectRegisterError, selectRegisterLoading } from './usersSlise';
 import { RegisterMutation } from '../../../types';
 
 const Register = () => {
   const dispatch = useAppDispatch();
-  const error = useAppSelector(selectRegisterError);
   const navigate = useNavigate();
+  const error = useAppSelector(selectRegisterError);
+  const registerLoading = useAppSelector(selectRegisterLoading);
 
   const [state, setState] = useState<RegisterMutation>({
     username: '',
@@ -88,6 +89,7 @@ const Register = () => {
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
+            disabled={registerLoading}
           >
             Sign Up
           </Button>

@@ -6,16 +6,14 @@ import { Comment } from '../../../types';
 
 interface CommentsState {
   comments: Comment[] | [];
-  comment: Comment | null;
-  fetchAllLoading: boolean;
-  addLoading: boolean;
+  fetchAllCommentsLoading: boolean;
+  addCommentLoading: boolean;
 }
 
 const initialState: CommentsState = {
   comments: [],
-  comment: null,
-  fetchAllLoading: false,
-  addLoading: false,
+  fetchAllCommentsLoading: false,
+  addCommentLoading: false,
 }
 
 export const CommentsSlice = createSlice({
@@ -24,28 +22,28 @@ export const CommentsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchComments.pending, (state) => {
-      state.fetchAllLoading = true;
+      state.fetchAllCommentsLoading = true;
     });
     builder.addCase(fetchComments.fulfilled, (state, action) => {
-      state.fetchAllLoading = false;
+      state.fetchAllCommentsLoading = false;
       state.comments = action.payload;
     });
     builder.addCase(fetchComments.rejected, (state) => {
-      state.fetchAllLoading = false;
+      state.fetchAllCommentsLoading = false;
     });
     builder.addCase(addComment.pending, (state) => {
-      state.addLoading = true;
+      state.addCommentLoading = true;
     });
     builder.addCase(addComment.fulfilled, (state) => {
-      state.addLoading = false;
+      state.addCommentLoading = false;
     });
     builder.addCase(addComment.rejected, (state) => {
-      state.addLoading = false;
+      state.addCommentLoading = false;
     });
   }});
 
 export const commentsReducer = CommentsSlice.reducer;
 export const selectComments = (state: RootState) => state.comments.comments;
-export const selectComment = (state: RootState) => state.comments.comment;
 
-export const selectFetchAllLoading = (state: RootState) => state.comments.fetchAllLoading;
+export const selectFetchAllCommentsLoading = (state: RootState) => state.comments.fetchAllCommentsLoading;
+export const selectAddCommentLoading = (state: RootState) => state.comments.addCommentLoading;

@@ -4,13 +4,14 @@ import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typograph
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { login } from './usersThunks';
-import { selectLoginError } from './usersSlise';
+import { selectLoginError, selectLoginLoading } from './usersSlise';
 import { LoginMutation } from '../../../types';
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  const error = useAppSelector(selectLoginError);
   const navigate = useNavigate();
+  const error = useAppSelector(selectLoginError);
+  const loginLoading = useAppSelector(selectLoginLoading);
 
   const [state, setState] = useState<LoginMutation>({
     username: '',
@@ -21,8 +22,6 @@ const Login = () => {
     const {name, value} = event.target;
     setState(prevState => ({...prevState, [name]: value}));
   };
-  
-
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -78,6 +77,7 @@ const Login = () => {
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
+            disabled={loginLoading}
           >
             Sign In
           </Button>
